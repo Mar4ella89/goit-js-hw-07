@@ -42,20 +42,16 @@ const onClickOpenModal = (event) => {
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-    modalImg.show();
-    window.addEventListener("keydown", onEscKeyPress);
+  modalImg.show();
+
+  window.addEventListener("keydown", onEscKeyPress);
 };
 
 const onEscKeyPress = (event) => {
-  
   if (event.code === "Escape") {
-    
     modalImg.close();
-    
   }
   window.removeEventListener("keydown", onEscKeyPress);
 };
 
 ref.imgRef.addEventListener("click", onClickOpenModal);
-
-
