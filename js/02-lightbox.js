@@ -9,9 +9,9 @@ const ref = {
 
 const creatImgList = galleryItems
   .map(
-    (item) =>
-      `<li><a class="gallery__item" href="${item.original}">
-  <img class="gallery__image" src="${item.preview}" alt="${item.description}" data-source="${item.original}" />
+    ({ preview, original, description }) =>
+      `<li><a class="gallery__item" href="${original}">
+  <img class="gallery__image" src="${preview}" alt="${description}" />
 </a></li>`
   )
   .join("");
@@ -29,4 +29,3 @@ const lightbox = new SimpleLightbox(".gallery a", {
   disableScroll: false,
   scrollZoom: false,
 });
-
