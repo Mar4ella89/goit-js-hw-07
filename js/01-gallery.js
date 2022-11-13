@@ -1,4 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
+// import * as basicLightbox from "basiclightbox";
 // Change code below this line
 
 console.log(galleryItems);
@@ -6,8 +7,6 @@ console.log(galleryItems);
 const ref = {
   imgRef: document.querySelector("div.gallery"),
 };
-
-console.log(ref.imgRef);
 
 const creatImgList = galleryItems
   .map(
@@ -28,5 +27,35 @@ const imgAdd = () => {
   ref.imgRef.insertAdjacentHTML("beforeend", creatImgList);
 };
 
-ref.imgRef.addEventListener("load", imgAdd);
 imgAdd();
+
+let modalImg = "";
+
+const onClickOpenModal = (event) => {
+  event.preventDefault();
+  const modalImgSource = event.target.dataset.source;
+
+  modalImg = basicLightbox.create(
+    `<img src="${modalImgSource}" width="800" height="600">`
+  );
+
+  if (!event.target.classList.contains("gallery__image")) {
+    return;
+  }
+    modalImg.show();
+    window.addEventListener("keydown", onEscKeyPress);
+};
+
+const onEscKeyPress = (event) => {
+  
+  if (event.code === "Escape") {
+    
+    modalImg.close();
+    
+  }
+  window.removeEventListener("keydown", onEscKeyPress);
+};
+
+ref.imgRef.addEventListener("click", onClickOpenModal);
+
+
