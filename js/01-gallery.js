@@ -1,5 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-// import * as basicLightbox from "basiclightbox";
 // Change code below this line
 
 console.log(galleryItems);
@@ -7,6 +6,8 @@ console.log(galleryItems);
 const ref = {
   imgRef: document.querySelector("div.gallery"),
 };
+
+const modalImg = basicLightbox.create(`<img>`);
 
 const creatImgList = galleryItems
   .map(
@@ -29,15 +30,11 @@ const imgAdd = () => {
 
 imgAdd();
 
-let modalImg = "";
-
 const onClickOpenModal = (event) => {
   event.preventDefault();
   const modalImgSource = event.target.dataset.source;
 
-  modalImg = basicLightbox.create(
-    `<img src="${modalImgSource}" width="800" height="600">`
-  );
+  modalImg.element().querySelector("img").src = modalImgSource;
 
   if (!event.target.classList.contains("gallery__image")) {
     return;
